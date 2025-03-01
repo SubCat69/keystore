@@ -5,19 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KeyStore</title>
     <style>
+        :root {
+            --background-light: #f4f4f4;   
+            --background-dark: #121212;
+            --text-light: #000;
+            --text-dark: #fff;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             text-align: center;
             margin: 0;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: var(--background-light);
+            color: var(--text-light);
+            transition: background 0.3s ease, color 0.3s ease;
         }
+
+        .dark-mode {
+            background-color: var(--background-dark);
+            color: var(--text-dark);
+        }
+
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
         }
+
         .product {
             background: white;
             border-radius: 10px;
@@ -25,15 +41,29 @@
             width: 250px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease-in-out;
+            position: relative;
         }
+
+        .dark-mode .product {
+            background: #222;
+            box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.1);
+        }
+
         .product:hover {
             transform: scale(1.05);
         }
+
+        .product:hover .buy-button {
+            background-color: #ffcc00;
+            color: #000;
+        }
+
         .product img {
             width: 100px;
             height: auto;
             margin-bottom: 10px;
         }
+
         .buy-button {
             background-color: green;
             color: white;
@@ -42,76 +72,185 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         .buy-button:hover {
             background-color: darkgreen;
+        }
+
+        .toggle-container {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            cursor: pointer;
+            width: 80px;
+            transition: transform 0.3s ease;
+        }
+
+        .search-box {
+            position: absolute;
+            top: 20px;
+            right: 180px;
+        }
+
+        .search-box input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-results {
+            position: absolute;
+            background: white;
+            width: 200px;
+            border-radius: 5px;
+            display: none;
+            z-index: 10;
+        }
+
+        .search-results div {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .search-results div:hover {
+            background: #f0f0f0;
+        }
+
+        .dark-mode .email a {
+            color: white;
         }
     </style>
 </head>
 <body>
 
+    <div class="search-box">
+        <input type="text" id="search" placeholder="Search...">
+        <div class="search-results" id="search-results"></div>
+    </div>
+    <img id="theme-toggle" class="toggle-container" src="Images/light-toggle.png" alt="Theme Toggle">
+
     <h1>Welcome to KeyStore</h1>
-    <p>Buy genuine Windows and Office product keys at the best prices!</p>
+    <p>Buy genuine Windows and Microsoft Office product keys at the best prices!</p>
 
     <div class="container">
         <div class="product">
-            <img src="Images/windows11.png" alt="Windows 11 Logo">
+            <img src="Images/windows11H.png" alt="Windows 11 Logo">
+            <h2>Windows 11 Home Key</h2>
+            <p>Price: ₹650</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product">
+            <img src="Images/windows11P.png" alt="Windows 11 Logo">
             <h2>Windows 11 Pro Key</h2>
-            <p>Price: $25</p>
+            <p>Price: ₹750</p>
             <button class="buy-button">Buy Now</button>
         </div>
-
         <div class="product">
-            <img src="Images/windows10.png" alt="Windows 10 Logo">
+            <img src="Images/windows10H.png" alt="Windows 10 Logo">
+            <h2>Windows 10 Home Key</h2>
+            <p>Price: ₹450</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product">
+            <img src="Images/windows10P.png" alt="Windows 10 Logo">
             <h2>Windows 10 Pro Key</h2>
-            <p>Price: $20</p>
+            <p>Price: ₹550</p>
             <button class="buy-button">Buy Now</button>
         </div>
-
-        <div class="product">
-            <img src="Images/office2024.png" alt="Microsoft Office 2024 Logo">
-            <h2>Office 2024 Professional Plus</h2>
-            <p>Price: $30</p>
-            <button class="buy-button">Buy Now</button>
-        </div>
-
-        <div class="product">
-            <img src="Images/office2021.png" alt="Microsoft Office 2021 Logo">
-            <h2>Office 2021 Professional Plus</h2>
-            <p>Price: $28</p>
-            <button class="buy-button">Buy Now</button>
-        </div>
-
-        <div class="product">
-            <img src="Images/office2019.png" alt="Microsoft Office 2019 Logo">
-            <h2>Office 2019 Professional Plus</h2>
-            <p>Price: $25</p>
-            <button class="buy-button">Buy Now</button>
-        </div>
-
-        <div class="product">
-            <img src="Images/office2016.png" alt="Microsoft Office 2016 Logo">
-            <h2>Office 2016 Professional Plus</h2>
-            <p>Price: $22</p>
-            <button class="buy-button">Buy Now</button>
-        </div>
-
         <div class="product">
             <img src="Images/office2013.png" alt="Microsoft Office 2013 Logo">
-            <h2>Office 2013 Professional Plus</h2>
-            <p>Price: $18</p>
+            <h2>Microsoft Office 2013</h2>
+            <p>Price: ₹300</p>
             <button class="buy-button">Buy Now</button>
         </div>
-
+        <div class="product">
+            <img src="Images/office2016.png" alt="Microsoft Office 2016 Logo">
+            <h2>Microsoft Office 2016</h2>
+            <p>Price: ₹300</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product">
+            <img src="Images/office2019.png" alt="Microsoft Office 2019 Logo">
+            <h2>Microsoft Office 2019</h2>
+            <p>Price: ₹500</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product">
+            <img src="Images/office2021.png" alt="Microsoft Office 2021 Logo">
+            <h2>Microsoft Office 2021</h2>
+            <p>Price: ₹500</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
+        <div class="product">
+            <img src="Images/office2024.png" alt="Microsoft Office 2024 Logo">
+            <h2>Microsoft Office 2024</h2>
+            <p>Price: ₹800</p>
+            <button class="buy-button">Buy Now</button>
+        </div>
         <div class="product">
             <img src="Images/office365.png" alt="Microsoft Office 365 Logo">
-            <h2>Office 365</h2>
-            <p>Price: $15/month</p>
+            <h2>Microsoft Office 365</h2>
+            <p>Price: ₹1250/year</p>
             <button class="buy-button">Buy Now</button>
         </div>
+        
     </div>
 
-    <p>Need Help?</p>
-    <p>Contact us at <a href="mailto:support@example.com">support@example.com</a></p>
-
+    <script>
+        document.getElementById("theme-toggle").addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+            this.style.transform = document.body.classList.contains("dark-mode") ? "rotate(180deg)" : "rotate(0deg)";
+        });
+    
+        const searchInput = document.getElementById("search");
+        const searchResults = document.getElementById("search-results");
+        const products = document.querySelectorAll(".product");
+    
+        function fuzzyMatch(query, text) {
+            const regex = new RegExp(query.split("").join(".*"), "i");
+            return regex.test(text);
+        }
+    
+        searchInput.addEventListener("input", function() {
+            const query = searchInput.value.toLowerCase();
+            searchResults.innerHTML = "";
+            if (query) {
+                products.forEach(product => {
+                    const title = product.querySelector("h2").textContent.toLowerCase();
+                    if (fuzzyMatch(query, title)) {
+                        const resultItem = document.createElement("div");
+                        const imgSrc = product.querySelector("img").src;
+                        const productName = product.querySelector("h2").textContent;
+    
+                        resultItem.innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 10px; padding: 8px; cursor: pointer; border-bottom: 1px solid #ddd;">
+                                <img src="${imgSrc}" width="40" height="40" style="border-radius:5px;">
+                                <span style="color: #000; font-size: 14px;">${productName}</span>
+                            </div>
+                        `;
+    
+                        resultItem.addEventListener("click", function() {
+                            searchInput.value = productName;
+                            searchResults.style.display = "none";
+                        });
+    
+                        searchResults.appendChild(resultItem);
+                    }
+                });
+                searchResults.style.display = "block";
+            } else {
+                searchResults.style.display = "none";
+            }
+        });
+    
+        document.addEventListener("click", function(event) {
+            if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+                searchResults.style.display = "none";
+            }
+        });
+    </script>
+    
+    
 </body>
 </html>
